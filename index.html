@@ -1,1 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal TEIN Connectivity Expansion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #EC1550;
+            --secondary: #F69AB0;
+            --body: #F8F3F0;
+            --text: #1D1D1B;
+            --secondary-dark: #5E0023;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,149.3L1200,139L1200,320L1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center/cover no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Logos Section */
+        .logos {
+            background: var(--white);
+            padding: 60px 0;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            max-width: 200px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            filter: grayscale(0.3);
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            filter: grayscale(0);
+        }
+
+        .logo-item img {
+            width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(236, 21, 80, 0.2);
+        }
+
+        /* Country Focus */
+        .country-focus {
+            background: var(--body);
+            text-align: center;
+        }
+
+        .country-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            border: 3px solid var(--primary);
+        }
+
+        .country-flag {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        .country-card h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .provinces-text {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            color: var(--secondary-dark);
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Activities Section */
+        .activities {
+            background: var(--body);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .activity-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(236, 21, 80, 0.15);
+        }
+
+        .activity-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Network Architecture */
+        .architecture {
+            background: var(--white);
+        }
+
+        .arch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .arch-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid var(--secondary);
+        }
+
+        .arch-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .arch-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .arch-card:hover .arch-icon {
+            color: var(--white);
+        }
+
+        /* Partners Section */
+        .partners {
+            background: var(--body);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .partner-card {
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .partner-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        .partner-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Outcomes Section */
+        .outcomes {
+            background: var(--white);
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .outcome-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .outcome-card:hover {
+            transform: translateY(-5px);
+            background: var(--white);
+        }
+
+        .outcome-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .outcome-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* SDGs Section */
+        .sdgs {
+            background: var(--body);
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .sdg-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sdg-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .logos-grid {
+                gap: 3rem;
+            }
+            
+            .logo-item {
+                max-width: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .arch-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .outcomes-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .sdg-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .logos-grid {
+                gap: 2rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo-item {
+                max-width: 150px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .activity-card, .sdg-card, .arch-card, .outcome-card {
+                padding: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            
+            .logo-item {
+                max-width: 120px;
+            }
+            
+            .logo-item img {
+                max-height: 60px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .country-flag {
+                font-size: 4rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(236, 21, 80, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(236, 21, 80, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(236, 21, 80, 0);
+            }
+        }
+
+        .cta-button {
+            animation: pulse 2s infinite;
+        }
+
+        /* Floating animation */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating {
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        /* Slide animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+
+        /* Network connection animation */
+        @keyframes networkPulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .network-pulse {
+            animation: networkPulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Nepal TEIN</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#country">Nepal</a></li>
+                <li><a href="#stats">Statistics</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#outcomes">Outcomes</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Nepal TEIN Connectivity</h1>
+                <p>Comprehensive feasibility study for expanding Trans-Eurasia Information Network (TEIN) connectivity through Nepal Research and Education Network (NREN) across all seven provinces to strengthen digital inclusion and research collaboration</p>
+                <a href="#about" class="cta-button">Explore Our Study</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="logos">
+        <div class="container">
+            <div class="logos-grid">
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asia Connect" />
+                </div>
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/eu-logo.png" alt="European Union" />
+                </div>
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/tein-logo.png" alt="TEIN Cooperation Center" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Our Study</h2>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll slide-in-left">
+                    <p>This project conducted a detailed feasibility study for expanding the Trans-Eurasia Information Network (TEIN) connectivity through the Nepal Research and Education Network (NREN) across all seven provinces of Nepal.</p>
+                    <p>The study assessed institutional readiness, ICT infrastructure, policy alignment, and financial viability, laying the foundation for a strategic and sustainable rollout of NREN connectivity to bolster digital inclusion, support research collaboration, and improve higher education access nationwide.</p>
+                </div>
+                <div class="highlight animate-on-scroll slide-in-right">
+                    <h3>Our Mission</h3>
+                    <p>To assess the feasibility and propose a strategic roadmap for the expansion of TEIN/NREN connectivity to higher education institutions across Nepal, creating a comprehensive network infrastructure for the digital future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="country" class="section country-focus">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Focus Country</h2>
+            <div class="country-card animate-on-scroll floating">
+                <div class="country-flag">🇳🇵</div>
+                <h3>Nepal</h3>
+                <p>Expanding TEIN connectivity across all seven provinces to strengthen digital education infrastructure and research collaboration capabilities nationwide.</p>
+                <div class="provinces-text">7 Provinces • 1,432 Institutions Mapped • 137 Shortlisted</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="section stats">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Study Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">1,432</div>
+                    <div class="stat-label">Institutions Mapped</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">311</div>
+                    <div class="stat-label">Master's Level + Institutions</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">137</div>
+                    <div class="stat-label">Feasible Candidates</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">132</div>
+                    <div class="stat-label">Officials Engaged</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">68</div>
+                    <div class="stat-label">Participating Institutions</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Awareness Workshops</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">ISP Partners Identified</div>
+                </div>
+                <div class="stat-card animate-on-scroll network-pulse">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Provinces Covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="section activities">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🗺️</div>
+                    <h3>Institution Mapping</h3>
+                    <p>Mapped 1,432 higher education institutions across Nepal, filtering to 137 feasible candidates for NREN connectivity expansion.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">💻</div>
+                    <h3>Online Awareness Workshops</h3>
+                    <p>Organized 13 sensitization sessions with 132 high-level officials from 68 institutions to raise NREN awareness.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🌐</div>
+                    <h3>ICT Infrastructure Analysis</h3>
+                    <p>Evaluated network reach and capabilities with major ISPs, identifying 8 suitable providers for connectivity.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">📋</div>
+                    <h3>Policy & Regulatory Review</h3>
+                    <p>Comprehensive review of ICT and education policy frameworks to identify gaps and strategic interventions.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">⚖️</div>
+                    <h3>Feasibility Assessment</h3>
+                    <p>Assessed technical readiness, institutional motivation, and financial constraints across all provinces.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🏗️</div>
+                    <h3>Network Architecture Design</h3>
+                    <p>Developed comprehensive REN architecture including PoP site selection and governance models.</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">💰</div>
+                    <h3>Financial Planning</h3>
+                    <p>Prepared detailed CapEx and OpEx estimates with cost-sharing and sustainability strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="section architecture">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Network Architecture</h2>
+            <div class="arch-grid">
+                <div class="arch-card animate-on-scroll">
+                    <div class="arch-icon">🏢</div>
+                    <h3>Point of Presence (PoP)</h3>
+                    <p>Strategic PoP site selection for optimal network coverage</p>
+                </div>
+                <div class="arch-card animate-on-scroll">
+                    <div class="arch-icon">🔗</div>
+                    <h3>Network Layers</h3>
+                    <p>Comprehensive network layer planning and design</p>
+                </div>
+                <div class="arch-card animate-on-scroll">
+                    <div class="arch-icon">🛡️</div>
+                    <h3>Governance Model</h3>
+                    <p>Robust governance framework for network management</p>
+                </div>
+                <div class="arch-card animate-on-scroll">
+                    <div class="arch-icon">📡</div>
+                    <h3>Backbone Connectivity</h3>
+                    <p>High-speed backbone infrastructure design</p>
+                </div>
+                <div class="arch-card animate-on-scroll">
+                    <div class="arch-icon">🌐</div>
+                    <h3>Last-Mile Solutions</h3>
+                    <p>Efficient last-mile connectivity to institutions</p>
+                </div>
+                <div class="arch-card animate-on-scroll">
+                    <div class="arch-icon">⚙️</div>
+                    <h3>Service Models</h3>
+                    <p>Flexible service delivery and bandwidth models</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="outcomes" class="section outcomes">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Outcomes</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">🎯</div>
+                    <h3>Institution Shortlisting</h3>
+                    <p>Successfully mapped and shortlisted 137 high-potential institutions for NREN connectivity expansion.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">👥</div>
+                    <h3>Stakeholder Engagement</h3>
+                    <p>Engaged 132 officials from 68 institutions through comprehensive awareness campaigns.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">📊</div>
+                    <h3>Comprehensive Documentation</h3>
+                    <p>Created detailed institutional database, ICT readiness status, and proposed architecture.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">📜</div>
+                    <h3>Policy Analysis</h3>
+                    <p>Developed policy and regulatory landscape analysis with targeted recommendations.</p>
+                </div>
+                <div class="outcome-card animate-on-scroll">
+                    <div class="outcome-icon">🗺️</div>
+                    <h3>Technical Roadmap</h3>
+                    <p>Provided comprehensive technical and financial roadmap for REN expansion and sustainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="section partners">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Partner Organizations</h2>
+            <div class="partners-grid">
+                <div class="partner-card animate-on-scroll">
+                    <h4>Nepal Research and Education Network</h4>
+                    <p>NREN - Lead Implementation Partner</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>Ministry of Education, Science and Technology</h4>
+                    <p>MoEST - Government Partner</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>University Grants Commission</h4>
+                    <p>UGC - Education Oversight</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="section sdgs">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Sustainable Development Goals</h2>
+            <div class="sdg-grid">
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">4</div>
+                    <h3>Quality Education</h3>
+                    <p>Enhancing access to quality higher education through improved digital connectivity and research collaboration capabilities.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">9</div>
+                    <h3>Industry, Innovation and Infrastructure</h3>
+                    <p>Building resilient digital infrastructure and promoting technological innovation across Nepal's education sector.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">10</div>
+                    <h3>Reduced Inequalities</h3>
+                    <p>Reducing digital inequalities between urban and rural areas by expanding network connectivity to all seven provinces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Nepal TEIN Project</h3>
+                    <p>Feasibility Study for Expansion of TEIN Connectivity in All Seven Provinces of Nepal</p>
+                    <p>Category: WP6 - 3rd Call</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#about">About</a>
+                    <a href="#country">Nepal</a>
+                    <a href="#stats">Statistics</a>
+                    <a href="#activities">Activities</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#outcomes">Outcomes</a>
+                    <a href="#partners">Partners</a>
+                    <a href="#impact">Impact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Key Achievements</h3>
+                    <p>1,432 Institutions Mapped</p>
+                    <p>137 Feasible Candidates Identified</p>
+                    <p>Comprehensive Network Architecture</p>
+                    <p>Strategic Implementation Roadmap</p>
+                </div>
+            </div>
+            <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 2rem 0;">
+            <p>&copy; 2025 Nepal TEIN Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(236, 21, 80, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Stats counter animation
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/,/g, ''));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString();
+                    }
+                };
+                
+                updateCounter();
+            });
+        };
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Add staggered animation delays to cards
+        const addStaggeredAnimations = () => {
+            const cardGroups = [
+                '.activities-grid .activity-card',
+                '.arch-grid .arch-card',
+                '.outcomes-grid .outcome-card',
+                '.partners-grid .partner-card',
+                '.stats-grid .stat-card'
+            ];
+
+            cardGroups.forEach(selector => {
+                const cards = document.querySelectorAll(selector);
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            });
+        };
+
+        // Initialize staggered animations when page loads
+        window.addEventListener('load', addStaggeredAnimations);
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.3;
+            
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add typing effect to hero title
+        const typeWriter = (element, text, delay = 80) => {
+            element.textContent = '';
+            let i = 0;
+            
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, delay);
+        };
+
+        // Initialize typing effect
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const originalText = heroTitle.textContent;
+                setTimeout(() => {
+                    typeWriter(heroTitle, originalText, 100);
+                }, 500);
+            }
+        });
+
+        // Add network connection visual effect
+        const createNetworkEffect = () => {
+            const statsCards = document.querySelectorAll('.stat-card');
+            statsCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                    }, 200);
+                }, index * 100);
+            });
+        };
+
+        // Trigger network effect when stats become visible
+        const networkObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(createNetworkEffect, 1000);
+                    networkObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if (statsSection) {
+            networkObserver.observe(statsSection);
+        }
+
+        // Add dynamic gradient animation to hero
+        let gradientPosition = 0;
+        setInterval(() => {
+            gradientPosition += 1;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.background = `linear-gradient(${135 + gradientPosition}deg, var(--primary) 0%, var(--secondary) 100%)`;
+            }
+        }, 50);
+    </script>
+</body>
+</html>
